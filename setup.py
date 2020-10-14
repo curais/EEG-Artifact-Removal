@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="EEG-Artifact-Removal", # Replace with your own username
-    version="0.0.1",
+    version="0.0.2",
     author="Cristhoper Ochoa Gutierrez",
     author_email="craisochoa22@gmail.com",
     description="A custom package for my thesis",
