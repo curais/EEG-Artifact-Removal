@@ -69,7 +69,7 @@ class SignalProcessor:
         return signal + noise
 
     def muscles(self, signal):
-        second = math.floor(sample_rate)
+        second = math.floor(self.sample_rate)
         hundred_ms = second // 10
         noise = self.filtered_noise(signal, 20, 60)
         print(noise)
