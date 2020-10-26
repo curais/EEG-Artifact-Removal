@@ -29,6 +29,7 @@ def get_trials(pathstrings,desired_sample_rate, input_sample_rate,mins=1,augment
     clean = []
     noisy = []
     for path in pathstrings:
+        print(path)
         for j in range(augmentation_factor):
             snr = snr_db[random.randint(0,len(snr_db) - 1)]
             clean_aux, noisy_aux = get_numpy_array_from_csv(path, desired_sample_rate, input_sample_rate, snr,mins)
