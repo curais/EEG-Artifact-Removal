@@ -5,7 +5,7 @@ from scipy import stats
 from scipy.signal import butter, lfilter, resample
 
 
-class SignalProcessor:
+class ArtifactGenerator:
 
     def __init__(self, sample_rate, snr_db):
         self.sample_rate = sample_rate

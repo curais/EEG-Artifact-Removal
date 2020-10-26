@@ -23,7 +23,7 @@ class UnidimensionalResCNN:
     def evaluate(self, test):
         return self.__model.predict(test, verbose=1)
 
-    def __resblock_factory(self, dimension, model):
+    def __resblock(self, dimension, model):
         resblock = Conv1D(32, dimension, activation=keras.activations.relu, padding='causal')(model)
         resblock = BatchNormalization()(resblock)
         resblock = ReLU()(resblock)
@@ -60,11 +60,11 @@ class UnidimensionalResCNN:
         my_conv = BatchNormalization()(my_conv)
         my_conv = ReLU()(my_conv)
 
-        resblock1 = self.__resblock_factory(3, my_conv)
+        resblock1 = self.__resblock(3, my_conv)
 
-        resblock2 = self.__resblock_factory(5, my_conv)
+        resblock2 = self.__resblock(5, my_conv)
 
-        resblock3 = self.__resblock_factory(7, my_conv)
+        resblock3 = self.__resblock(7, my_conv)
 
         my_conv = Concatenate()([resblock1, resblock2, resblock3])
 
