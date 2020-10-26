@@ -24,14 +24,14 @@ def get_numpy_array_from_csv(path, desired_sample_rate, input_sample_rate, snr_d
     normalized_noisy = generator.normalize(noisy)
     return (normalized_clean, normalized_noisy)
 
-def get_trials(number_of_trials, pathstring,desired_sample_rate, input_sample_rate,mins=1,augmentation_factor=1):
+def get_trials(pathstrings,desired_sample_rate, input_sample_rate,mins=1,augmentation_factor=1):
     snr_db = [-5,-3,-1,0,1,3,5]
     clean = []
     noisy = []
-    for i in range(number_of_trials):
+    for i in range(pathstrings):
         for j in range(augmentation_factor):
             snr = snr_db[random.randint(0,len(snr_db) - 1)]
-            clean_aux, noisy_aux = get_numpy_array_from_csv(pathstring.format(i=i + 1), desired_sample_rate, input_sample_rate, snr,mins)
+            clean_aux, noisy_aux = get_numpy_array_from_csv(pathstrings[i], desired_sample_rate, input_sample_rate, snr,mins)
             clean.append(clean_aux)
             noisy.append(noisy_aux)
     clean = np.array(clean)
