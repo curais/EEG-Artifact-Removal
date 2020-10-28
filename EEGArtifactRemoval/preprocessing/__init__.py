@@ -2,9 +2,11 @@ import pandas as pd
 from scipy.signal import resample
 import numpy as np
 import random
+
+from scipy.stats import stats
+
 from EEGArtifactRemoval.preprocessing.DataPreprocessor import DataPreprocessor
 from EEGArtifactRemoval.preprocessing.ArtifactGenerator import ArtifactGenerator
-
 
 def get_numpy_array_from_csv(path, desired_sample_rate, input_sample_rate, snr_db,mins=1):
     """
@@ -19,9 +21,9 @@ def get_numpy_array_from_csv(path, desired_sample_rate, input_sample_rate, snr_d
         samps)
     # clean = pd.read_csv(path, usecols=[0,1],index_col=0,nrows=seconds_in_samples).to_numpy(dtype='float64')
     generator = ArtifactGenerator(desired_sample_rate, snr_db)
-    normalized_clean = generator.normalize(clean)
+    normalized_clean = stats.zscore(clean)
     noisy = generator.generate_noisy_signal(clean)
-    normalized_noisy = generator.normalize(noisy)
+    normalized_noisy = stats.zscore(noisy)
     return (normalized_clean, normalized_noisy)
 
 def get_trials(pathstrings,desired_sample_rate, input_sample_rate,mins=1,augmentation_factor=1):
