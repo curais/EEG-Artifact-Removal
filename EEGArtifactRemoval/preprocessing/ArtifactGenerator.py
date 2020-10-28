@@ -21,7 +21,7 @@ class ArtifactGenerator:
         nyq = 0.5 * fs
         low = lowcut / nyq
         high = highcut / nyq
-        b, a = butter(order, [low, high], btype='band')
+        b, a, _ = butter(order, [low, high], btype='band')
         return b, a
 
     def butter_bandpass_filter(self, data, lowcut, highcut, fs, order=5):
@@ -72,7 +72,6 @@ class ArtifactGenerator:
         second = math.floor(self.sample_rate)
         hundred_ms = second // 10
         noise = self.filtered_noise(signal, 20, 60)
-        print(noise)
         window = (7 * hundred_ms, 7 * hundred_ms)
         blanc = (second, 4 * second)
         noise = self.apply_window(noise, window, blanc, drop=75)
