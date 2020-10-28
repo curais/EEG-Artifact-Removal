@@ -21,7 +21,7 @@ class ArtifactGenerator:
         nyq = 0.5 * fs
         low = lowcut / nyq
         high = highcut / nyq
-        b, a, _ = butter(order, [low, high], btype='band')
+        b, a = butter(order, [low, high], btype='band')
         return b, a
 
     def __butter_bandpass_filter(self, data, lowcut, highcut, fs, order=5):
