@@ -14,7 +14,7 @@ class UnidimensionalResCNN:
     def train(self, train_data, train_labels, test_data, test_labels, epochs=10):
         return self.__model.fit(x=train_data, y=train_labels, epochs=epochs, validation_data=(test_data, test_labels))
 
-    def show_sumary(self):
+    def show_summary(self):
         self.__model.summary()
 
     def plot_model(self, filename):

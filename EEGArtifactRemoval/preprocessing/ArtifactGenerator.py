@@ -1,8 +1,8 @@
 import math
 import random
+
 import numpy as np
-from scipy import stats
-from scipy.signal import butter, lfilter, resample
+from scipy.signal import butter, lfilter
 
 
 class ArtifactGenerator:
@@ -66,7 +66,7 @@ class ArtifactGenerator:
         window = (7 * hundred_ms, 14 * hundred_ms)
         blanc = (second, 4 * second)
         noise = self.__apply_window(noise, window, blanc)
-        return signal + noise
+        return noise
 
     def muscles(self, signal):
         second = math.floor(self.sample_rate)
@@ -75,13 +75,13 @@ class ArtifactGenerator:
         window = (7 * hundred_ms, 7 * hundred_ms)
         blanc = (second, 4 * second)
         noise = self.__apply_window(noise, window, blanc, drop=75)
-        return signal + noise
+        return noise
 
     def __decide(self, probability):
         return random.random() < probability
 
     def generate_noisy_signal(self, signal, eyes=True, muscles=True):
         contaminated = signal
-        if (eyes) : contaminated = self.eyes(contaminated)
-        if (muscles) : contaminated = self.muscles(contaminated)
+        if (eyes) : contaminated += self.eyes(signal)
+        if (muscles) : contaminated += self.muscles(signal)
         return contaminated
