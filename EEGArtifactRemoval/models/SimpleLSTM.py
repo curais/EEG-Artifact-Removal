@@ -26,11 +26,10 @@ class SimpleLSTM:
         return self.__model.predict(test, verbose=1)
 
     def __build_model(self, window_length):
-        x = Input(shape=(window_length, 1))
 
         model = Sequential()
 
-        model.add(LSTM(100, input_shape=x, return_sequences=True, activation=keras.activations.sigmoid))
+        model.add(LSTM(100, input_shape=(window_length, 1), return_sequences=True, activation=keras.activations.sigmoid))
         model.add(TimeDistributed(Dense(50)))
         model.add(GlobalAveragePooling1D())
 
