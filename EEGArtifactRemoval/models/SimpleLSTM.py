@@ -2,7 +2,7 @@ from tensorflow import keras
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.layers import TimeDistributed, LSTM
-from . import AbstractModel
+from .AbstractModel import AbstractModel
 from .metrics import snr_metric
 
 

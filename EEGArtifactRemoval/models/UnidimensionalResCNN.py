@@ -4,7 +4,7 @@ from tensorflow.keras.layers import Add, Concatenate
 from tensorflow.keras.layers import BatchNormalization, ReLU, Dense
 from tensorflow.keras.layers import Conv1D, Input
 from .metrics import snr_metric
-from . import AbstractModel
+from .AbstractModel import AbstractModel
 
 
 class UnidimensionalResCNN(AbstractModel):
