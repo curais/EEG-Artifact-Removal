@@ -12,6 +12,8 @@ class UnidimensionalResCNN(AbstractModel):
     def __init__(self, input_shape):
         super().__init__(input_shape)
 
+
+
     def __resblock(self, dimension, model):
         resblock = Conv1D(32, dimension, activation=keras.activations.relu, padding='causal')(model)
         resblock = BatchNormalization()(resblock)
@@ -42,7 +44,7 @@ class UnidimensionalResCNN(AbstractModel):
         resblock = Add()([resblock, add])
         return resblock
 
-    def __build_model(self, window_length):
+    def _AbstractModel__build_model(self, window_length):
         x = Input(shape=(window_length, 1))
 
         my_conv = Conv1D(32, 5, activation=keras.activations.relu, padding='causal')(x)

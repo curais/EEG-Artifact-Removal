@@ -11,7 +11,7 @@ class SimpleLSTM(AbstractModel):
     def __init__(self, input_shape):
         super().__init__(input_shape)
 
-    def __build_model(self, window_length):
+    def _AbstractModel__build_model(self, window_length):
         shape = (window_length, 1)
         model = Sequential()
         model.add(LSTM(100, input_shape=shape, return_sequences=True, activation=keras.activations.sigmoid))
