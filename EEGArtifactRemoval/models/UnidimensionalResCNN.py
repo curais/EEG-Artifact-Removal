@@ -9,6 +9,9 @@ from EEGArtifactRemoval.models import AbstractModel
 
 class UnidimensionalResCNN(AbstractModel):
 
+    def __init__(self, input_shape):
+        super().__init__(self, input_shape)
+
     def __resblock(self, dimension, model):
         resblock = Conv1D(32, dimension, activation=keras.activations.relu, padding='causal')(model)
         resblock = BatchNormalization()(resblock)

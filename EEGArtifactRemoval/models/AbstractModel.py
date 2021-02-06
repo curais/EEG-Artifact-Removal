@@ -1,8 +1,9 @@
 from abc import ABC, abstractmethod
 from tensorflow import keras
 
+
 class AbstractModel(ABC):
-    def __init__(self,input_shape):
+    def __init__(self, input_shape):
         self.__model = self.__build_model(input_shape)
 
     def save(self, path):

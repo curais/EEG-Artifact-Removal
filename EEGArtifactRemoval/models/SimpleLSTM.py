@@ -8,6 +8,9 @@ from EEGArtifactRemoval.models.metrics import snr_metric
 
 class SimpleLSTM(AbstractModel):
 
+    def __init__(self, input_shape):
+        super().__init__(self,input_shape)
+
     def __build_model(self, window_length):
         shape = (window_length, 1)
         model = Sequential()
