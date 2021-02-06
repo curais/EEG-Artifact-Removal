@@ -2,26 +2,11 @@ from tensorflow import keras
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.layers import TimeDistributed, LSTM
-
+from EEGArtifactRemoval.models import AbstractModel
 from EEGArtifactRemoval.models.metrics import snr_metric
 
 
-class SimpleLSTM:
-
-    def __init__(self, input_shape):
-        self.__model = self.__build_model(input_shape)
-
-    def train(self, train_data, train_labels, test_data, test_labels, epochs=10):
-        return self.__model.fit(x=train_data, y=train_labels, epochs=epochs, validation_data=(test_data, test_labels))
-
-    def show_summary(self):
-        self.__model.summary()
-
-    def plot_model(self, filename):
-        keras.utils.plot_model(self.__model, filename, show_shapes=True, show_layer_names=False)
-
-    def evaluate(self, test):
-        return self.__model.predict(test, verbose=1)
+class SimpleLSTM(AbstractModel):
 
     def __build_model(self, window_length):
         shape = (window_length, 1)
