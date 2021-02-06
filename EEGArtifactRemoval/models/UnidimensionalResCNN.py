@@ -3,8 +3,8 @@ from tensorflow.keras import Model
 from tensorflow.keras.layers import Add, Concatenate
 from tensorflow.keras.layers import BatchNormalization, ReLU, Dense
 from tensorflow.keras.layers import Conv1D, Input
-from EEGArtifactRemoval.models.metrics import snr_metric
-from EEGArtifactRemoval.models import AbstractModel
+from .metrics import snr_metric
+from . import AbstractModel
 
 
 class UnidimensionalResCNN(AbstractModel):

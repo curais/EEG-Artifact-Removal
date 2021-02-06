@@ -2,8 +2,8 @@ from tensorflow import keras
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.layers import TimeDistributed, LSTM
-from EEGArtifactRemoval.models import AbstractModel
-from EEGArtifactRemoval.models.metrics import snr_metric
+from . import AbstractModel
+from .metrics import snr_metric
 
 
 class SimpleLSTM(AbstractModel):
