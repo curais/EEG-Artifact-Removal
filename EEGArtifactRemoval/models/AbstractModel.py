@@ -4,8 +4,8 @@ from tensorflow import keras
 
 class AbstractModel(ABC):
     def __init__(self, input_shape):
-        self.model = self.__build_model(input_shape)
         super().__init__()
+        self.model = self.__build_model(input_shape)
 
     def save(self, path):
         return self.model.sample_weights(path)

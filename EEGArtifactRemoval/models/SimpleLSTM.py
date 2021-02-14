@@ -9,7 +9,7 @@ from .metrics import snr_metric
 class SimpleLSTM(AbstractModel):
 
     def __init__(self, input_shape):
-        AbstractModel.__init__(input_shape)
+        super().__init__(input_shape)
 
     def _AbstractModel__build_model(self, window_length):
         shape = (window_length, 1)
