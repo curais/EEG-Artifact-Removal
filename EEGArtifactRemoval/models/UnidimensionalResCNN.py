@@ -10,7 +10,7 @@ from .AbstractModel import AbstractModel
 class UnidimensionalResCNN(AbstractModel):
 
     def __init__(self, input_shape):
-        super().__init__(input_shape)
+        AbstractModel.__init__(input_shape)
 
 
 
