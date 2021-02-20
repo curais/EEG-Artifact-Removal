@@ -8,7 +8,7 @@ class AbstractModel(ABC):
         self.model = self.__build_model(input_shape)
 
     def save(self, path):
-        return self.model.sample_weights(path)
+        return self.model.save_weights(path)
 
     def load(self, path):
         return self.model.load_weights(path)
