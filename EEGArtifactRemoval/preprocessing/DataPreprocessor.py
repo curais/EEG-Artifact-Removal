@@ -1,5 +1,6 @@
 import numpy as np
 import math
+import mpu
 
 class DataPreprocessor:
 
@@ -8,13 +9,18 @@ class DataPreprocessor:
         self.separation_factor = separation_factor
         self.step = step
 
-    def separate_data(self,clean, noisy, factor=0.8):
+    def separate_data(self,clean, noisy, factor=0.8, save=False):
         pivot = math.floor(clean.shape[0] * factor)
-        clean_train = clean[0:pivot]
-        noisy_train = noisy[0:pivot]
-        clean_test = clean[pivot:]
-        noisy_test = noisy[pivot:]
-        return (clean_train, noisy_train, clean_test, noisy_test)
+        train_labels = clean[0:pivot]
+        train_data = noisy[0:pivot]
+        test_labels = clean[pivot:]
+        test_data = noisy[pivot:]
+        if save:
+            mpu.io.write('train_data.pickle', train_data)
+            mpu.io.write('train_labels.pickle', train_labels)
+            mpu.io.write('test_data.pickle', test_data)
+            mpu.io.write('test_labels.pickle', test_labels)
+        return (train_data,train_labels,test_data,test_labels)
 
     def __moving_window(self,x, length, step=1):
         windows = []
