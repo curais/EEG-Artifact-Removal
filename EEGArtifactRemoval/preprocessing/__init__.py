@@ -40,9 +40,9 @@ def get_trials(pathstrings,desired_sample_rate, input_sample_rate,mins=1,augment
     noisy = np.array(noisy)
     return (clean,noisy)
 
-def separate_data(clean, noisy, window_length, step, separation_factor=0.8):
+def separate_data(clean, noisy, window_length, step, separation_factor=0.8, save=False):
     processor = DataPreprocessor(window_length, step, separation_factor)
-    clean_train, noisy_train, clean_test, noisy_test = processor.separate_data(clean, noisy)
+    clean_train, noisy_train, clean_test, noisy_test = processor.separate_data(clean, noisy,save=save)
     train_data = processor.to_list_of_time_windows(noisy_train, window_length, step=step)
     train_labels = processor.to_list_of_time_windows(clean_train, window_length, step=step)
     test_data = processor.to_list_of_time_windows(noisy_test, window_length, step=step)
