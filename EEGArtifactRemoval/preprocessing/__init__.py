@@ -2,6 +2,7 @@ import pandas as pd
 from scipy.signal import resample
 import numpy as np
 import random
+import mpu
 
 from scipy.stats import stats
 
@@ -42,10 +43,14 @@ def get_trials(pathstrings,desired_sample_rate, input_sample_rate,mins=1,augment
 
 def separate_data(clean, noisy, window_length, step, separation_factor=0.8, save=False):
     processor = DataPreprocessor(window_length, step, separation_factor)
-    clean_train, noisy_train, clean_test, noisy_test = processor.separate_data(clean, noisy,save=save)
+    noisy_train,clean_train,noisy_test, clean_test = processor.separate_data(clean, noisy,save=save)
     train_data = processor.to_list_of_time_windows(noisy_train, window_length, step=step)
     train_labels = processor.to_list_of_time_windows(clean_train, window_length, step=step)
     test_data = processor.to_list_of_time_windows(noisy_test, window_length, step=step)
     test_labels = processor.to_list_of_time_windows(clean_test, window_length, step=step)
-
+    if save:
+        mpu.io.write('train_data.pickle', train_data)
+        mpu.io.write('train_labels.pickle', train_labels)
+        mpu.io.write('test_data.pickle', test_data)
+        mpu.io.write('test_labels.pickle', test_labels)
     return (train_data, train_labels, test_data, test_labels)
