@@ -9,7 +9,7 @@ from scipy.stats import stats
 from EEGArtifactRemoval.preprocessing.DataPreprocessor import DataPreprocessor
 from EEGArtifactRemoval.preprocessing.ArtifactGenerator import ArtifactGenerator
 
-def get_numpy_array_from_csv(path, desired_sample_rate, input_sample_rate, snr_db,mins=1):
+def get_numpy_array_from_csv(path, desired_sample_rate, input_sample_rate, snr_db,eyes=True,muscles=True,mins=1):
     """
     Reads a csv file and returns a normalized and preprocessed numpy array
 
@@ -23,7 +23,7 @@ def get_numpy_array_from_csv(path, desired_sample_rate, input_sample_rate, snr_d
     # clean = pd.read_csv(path, usecols=[0,1],index_col=0,nrows=seconds_in_samples).to_numpy(dtype='float64')
     generator = ArtifactGenerator(desired_sample_rate, snr_db)
     normalized_clean = stats.zscore(clean)
-    noisy = generator.generate_noisy_signal(clean)
+    noisy = generator.generate_noisy_signal(clean,eyes,muscles)
     normalized_noisy = stats.zscore(noisy)
     return (normalized_clean, normalized_noisy)
 
