@@ -3,25 +3,14 @@ from tensorflow.keras import Model
 from tensorflow.keras.layers import Add, Concatenate
 from tensorflow.keras.layers import BatchNormalization, ReLU, Dense
 from tensorflow.keras.layers import Conv1D, Input
-from EEGArtifactRemoval.models.metrics import snr_metric
+from .metrics import snr_metric
+from .AbstractModel import AbstractModel
 
 
-class UnidimensionalResCNN:
+class UnidimensionalResCNN(AbstractModel):
 
     def __init__(self, input_shape):
-        self.__model = self.__build_model(input_shape)
-
-    def train(self, train_data, train_labels, test_data, test_labels, epochs=10):
-        return self.__model.fit(x=train_data, y=train_labels, epochs=epochs, validation_data=(test_data, test_labels))
-
-    def show_sumary(self):
-        self.__model.summary()
-
-    def plot_model(self, filename):
-        keras.utils.plot_model(self.__model, filename, show_shapes=True, show_layer_names=False)
-
-    def evaluate(self, test):
-        return self.__model.predict(test, verbose=1)
+        super().__init__(input_shape)
 
     def __resblock(self, dimension, model):
         resblock = Conv1D(32, dimension, activation=keras.activations.relu, padding='causal')(model)
@@ -53,7 +42,7 @@ class UnidimensionalResCNN:
         resblock = Add()([resblock, add])
         return resblock
 
-    def __build_model(self, window_length):
+    def _AbstractModel__build_model(self, window_length):
         x = Input(shape=(window_length, 1))
 
         my_conv = Conv1D(32, 5, activation=keras.activations.relu, padding='causal')(x)
